@@ -1,6 +1,7 @@
 ﻿using CQRS_Training.Data.Entities;
 using CQRS_Training.Data.Infra.Contexts;
 using CQRS_Training.Data.Infra.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CQRS_Training.Data.Repositories;
 
@@ -36,5 +37,15 @@ public class CustomerRepository : ICustomerRepository
             Email = customer.Email,
             Name = customer.Name
         };
+    }
+    
+    public async Task<List<Customer>> FindCustomers()
+    {
+        return await _ctx.Customers.ToListAsync();
+    }
+
+    public async Task<Customer> FindCustomer(int id)
+    {
+        return await _ctx.Customers.FirstOrDefaultAsync(x => x.Id == id);
     }
 }

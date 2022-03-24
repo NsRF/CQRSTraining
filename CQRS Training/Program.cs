@@ -13,6 +13,7 @@ services.AddSwaggerGen();
 services.AddDbContext<CqrsContext>(op => op.UseNpgsql(Common.GetSettings("ConnectionString")));
 services.AddScoped<ICustomerRepository, CustomerRepository>();
 services.AddTransient<ICreateCustomerHandler, CreateCustomerHandler>();
+services.AddTransient<IFindCustomerHandler, FindCustomerHandler>();
 
 
 var app = builder.Build();
